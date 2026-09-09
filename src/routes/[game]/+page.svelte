@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { onMount } from 'svelte';
+	import {onMount} from 'svelte';
 
 	onMount(async () => {
 		const game = page.params.game;
