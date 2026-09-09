@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import {onMount} from 'svelte';
+	import { onMount } from 'svelte';
 
 	onMount(async () => {
 		const game = page.params.game;
@@ -39,7 +39,7 @@
 		<span id="personal-legal-disclaimer"></span>
 		Icons from Google Fonts.<br />The data is added by hand. If something is wrong or missing,
 		please
-		<a href="https://github.com/k-henr/resource-graphs/issues/new">make a github issue</a>!
+		<a href="https://github.com/k-henr/resource-calc/issues/new">make a github issue</a>!
 	</small>
 </footer>
 
