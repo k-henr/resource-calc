@@ -9,15 +9,10 @@ Links:
 ### APP
 
 - Stuff not yet on the wiki (look up in-game):
-    - Vulcanizer
-    - Update brackwax image
+  - Vulcanizer
 
 ## Cleanup
 
-- Check if it'd be easy to move to sveltekit. I feel like it _should_ be, but I'm probably wrong? If it's easy enough to warrant doing, move to a routing system instead of hashes with the game as a slug instead of a hash
-    - Alternatively, wait with this until I have a server running in order to avoid the prerendering stuff
-- Make a proper readme with some info from [dataStorage.md](dataStorage.md)
-    - Check [types.ts](scripts/types.ts) for stuff I forgot to document
 - Start hosting on GHP! (set up CNAME for `resourcecalc.khenr.se`)
 - Move further TODOs to github issues (and never touch them again)
 
@@ -61,9 +56,9 @@ Links:
 - Add a hub page for when the hash is empty where you can choose any other places to go. Should use a completely different HTML page, which might be difficult? Maybe moving to Svelte would be sensible
 - Support descriptions as well as links to wiki articles for converters/resources
 - Better formatting in display names
-    - Boolean operators (`{Bottomless Stomach+Mouth Breather|Really bad} dupe`)
-    - Choosing text for enumerables and numbers (`{a<5|small}{10<a|big}{5<=a<=10|normal}` for numbers?)
-    - `OR` choices could show up (at least entangled ones)?
+  - Boolean operators (`{Bottomless Stomach+Mouth Breather|Really bad} dupe`)
+  - Choosing text for enumerables and numbers (`{a<5|small}{10<a|big}{5<=a<=10|normal}` for numbers?)
+  - `OR` choices could show up (at least entangled ones)?
 - When adding a converter from a resource drain, add an option at the top to add the required item as an item source instead
 - Tooltip system? As in, when hovering over an interactive element of the page it displays a description of what that element does
 - Toggles enabling/disabling converters and resources (for DLCs, serpulo/erekir, common mods etc)
