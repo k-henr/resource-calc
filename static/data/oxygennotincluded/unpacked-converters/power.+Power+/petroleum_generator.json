@@ -1,0 +1,10 @@
+{
+    "templateName": "heavy_generator",
+
+    "consumes": [{ "type": "TAG", "tagName": "Combustible Liquid", "amount": 1200 }],
+    "tunedProduct": { "type": "RESOURCE", "id": "power", "amount": 2000 },
+    "additionalProducts": [
+        { "type": "RESOURCE", "id": "polluted_water", "amount": 450 },
+        { "type": "RESOURCE", "id": "carbon_dioxide", "amount": 300 }
+    ]
+}

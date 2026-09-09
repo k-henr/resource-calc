@@ -1,0 +1,11 @@
+{
+    "consumes": [
+        { "type": "RESOURCE", "id": "power", "amount": 120 },
+        { "type": "RESOURCE", "id": "polluted_water", "amount": 3000 },
+        { "type": "TAG", "tagName": "Filtration Medium", "amount": 600 }
+    ],
+    "produces": [
+        { "type": "RESOURCE", "id": "water", "amount": 3000 },
+        { "type": "RESOURCE", "id": "polluted_dirt", "amount": 120 }
+    ]
+}

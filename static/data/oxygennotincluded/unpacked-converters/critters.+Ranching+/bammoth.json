@@ -1,0 +1,67 @@
+{
+    "templateName": "critter-2%",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Bammoth",
+    "morphs": ["Bammoth", "Regal Bammoth"],
+    "defaultMorph": "Bammoth",
+    "meat": "meat",
+    "caloriesDropped": 22400,
+    "egg": "bammoth_egg",
+    "consumeResource": [
+        {
+            "type": "OR",
+            "resources": [
+                {
+                    "type": "CONVERTER",
+                    "id": "plume_squash_plant",
+                    "amount": {
+                        "type": "SETTING",
+                        "name": "Wild",
+                        "true": 16,
+                        "false": 4
+                    },
+                    "amountPreview": 4
+                },
+                { "type": "RESOURCE", "id": "plume_squash", "amount": [16000, 9] },
+                { "type": "RESOURCE", "id": "squash_fries", "amount": 1349.8 },
+                {
+                    "type": "CONVERTER",
+                    "id": "nosh_sprout",
+                    "amount": {
+                        "type": "SETTING",
+                        "name": "Wild",
+                        "true": 12,
+                        "false": 3
+                    },
+                    "amountPreview": 3
+                },
+                {
+                    "type": "RESOURCE",
+                    "id": "nosh_bean",
+                    "amount": 1.6
+                }
+            ]
+        }
+    ],
+    "produceResource": [
+        { "type": "RESOURCE", "id": "bammoth_patty", "amount": 30 },
+        {
+            "type": "BRANCH",
+            "settingName": "Morph",
+            "branches": [
+                [
+                    "Bammoth",
+                    { "type": "RESOURCE", "id": "reed_fiber", "amount": [5, 10] }
+                ],
+                [
+                    "Regal Bammoth",
+                    {
+                        "type": "RESOURCE",
+                        "id": "regal_bammoth_crest",
+                        "amount": [250, 10]
+                    }
+                ]
+            ]
+        }
+    ]
+}

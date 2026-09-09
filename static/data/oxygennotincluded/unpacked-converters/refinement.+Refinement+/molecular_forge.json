@@ -1,0 +1,112 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": [
+                "Atomic Power Bank",
+                "Fullerene",
+                "Insulite",
+                "Plastium",
+                "Thermium"
+            ],
+            "default": "Atomic Power Bank"
+        }
+    ],
+    "consumes": [
+        { "type": "RESOURCE", "id": "power", "amount": [1600, 15] },
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Thermium",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "niobium", "amount": 5 },
+                            { "type": "RESOURCE", "id": "tungsten", "amount": 95 }
+                        ]
+                    }
+                ],
+                [
+                    "Insulite",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "isosap", "amount": 15 },
+                            {
+                                "type": "RESOURCE",
+                                "id": "abyssalite",
+                                "amount": 80
+                            },
+                            {
+                                "type": "TAG",
+                                "tagName": "&Fiber",
+                                "amount": 5
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Plastium",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "thermium", "amount": 15 },
+                            { "type": "RESOURCE", "id": "plastic", "amount": 70 },
+                            { "type": "RESOURCE", "id": "brackwax", "amount": 15 }
+                        ]
+                    }
+                ],
+                [
+                    "Fullerene",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "graphite", "amount": 90 },
+                            { "type": "RESOURCE", "id": "sulfur", "amount": 5 },
+                            { "type": "RESOURCE", "id": "aluminum", "amount": 5 }
+                        ]
+                    }
+                ],
+                [
+                    "Atomic Power Bank",
+                    { "type": "RESOURCE", "id": "enriched_uranium", "amount": 10 }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Thermium",
+                    { "type": "RESOURCE", "id": "thermium", "amount": 100 }
+                ],
+                [
+                    "Insulite",
+                    { "type": "RESOURCE", "id": "insulite", "amount": 100 }
+                ],
+                [
+                    "Plastium",
+                    { "type": "RESOURCE", "id": "plastium", "amount": 100 }
+                ],
+                [
+                    "Fullerene",
+                    { "type": "RESOURCE", "id": "fullerene", "amount": 100 }
+                ],
+                [
+                    "Atomic Power Bank",
+                    {
+                        "type": "RESOURCE",
+                        "id": "atomic_power_bank",
+                        "amount": 5400000
+                    }
+                ]
+            ]
+        }
+    ]
+}

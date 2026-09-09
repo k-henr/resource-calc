@@ -1,0 +1,189 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": ["Brackene", "Phyto Oil", "Resin"],
+            "default": "Brackene"
+        }
+    ],
+    "consumes": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Brackene",
+                    {
+                        "type": "OR",
+                        "resources": [
+                            {
+                                "type": "AND",
+                                "resources": [
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "nosh_bean",
+                                        "amount": 2
+                                    },
+                                    {
+                                        "type": "OR",
+                                        "resources": [
+                                            {
+                                                "type": "RESOURCE",
+                                                "id": "water",
+                                                "amount": 18
+                                            },
+                                            {
+                                                "type": "RESOURCE",
+                                                "id": "mucin",
+                                                "amount": 18
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AND",
+                                "resources": [
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "sleet_wheat_grain",
+                                        "amount": 10
+                                    },
+                                    {
+                                        "type": "OR",
+                                        "resources": [
+                                            {
+                                                "type": "RESOURCE",
+                                                "id": "water",
+                                                "amount": 15
+                                            },
+                                            {
+                                                "type": "RESOURCE",
+                                                "id": "mucin",
+                                                "amount": 15
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AND",
+                                "resources": [
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "pincha_peppernut",
+                                        "amount": 3
+                                    },
+                                    {
+                                        "type": "OR",
+                                        "resources": [
+                                            {
+                                                "type": "RESOURCE",
+                                                "id": "water",
+                                                "amount": 17
+                                            },
+                                            {
+                                                "type": "RESOURCE",
+                                                "id": "mucin",
+                                                "amount": 17
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            { "type": "RESOURCE", "id": "dewdrip", "amount": 2 }
+                        ]
+                    }
+                ],
+                [
+                    "Phyto Oil",
+                    {
+                        "type": "ENTANGLED_OR",
+                        "id": "phyto_oil_ingredient",
+                        "resources": [
+                            [
+                                "slime",
+                                { "type": "RESOURCE", "id": "slime", "amount": 100 }
+                            ],
+                            [
+                                "seakomb",
+                                {
+                                    "type": "AND",
+                                    "resources": [
+                                        {
+                                            "type": "RESOURCE",
+                                            "id": "seakomb_leaf",
+                                            "amount": 25
+                                        },
+                                        {
+                                            "type": "RESOURCE",
+                                            "id": "water",
+                                            "amount": 75
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                ["Resin", { "type": "RESOURCE", "id": "amber", "amount": 100 }]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                ["Brackene", { "type": "RESOURCE", "id": "brackene", "amount": 20 }],
+                [
+                    "Phyto Oil",
+                    {
+                        "type": "ENTANGLED_OR",
+                        "id": "phyto_oil_ingredient",
+                        "resources": [
+                            [
+                                "slime",
+                                {
+                                    "type": "AND",
+                                    "resources": [
+                                        {
+                                            "type": "RESOURCE",
+                                            "id": "phyto_oil",
+                                            "amount": 70
+                                        },
+                                        {
+                                            "type": "RESOURCE",
+                                            "id": "dirt",
+                                            "amount": 30
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                "seakomb",
+                                {
+                                    "type": "RESOURCE",
+                                    "id": "phyto_oil",
+                                    "amount": 100
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    "Resin",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "resin", "amount": 100 },
+                            { "type": "RESOURCE", "id": "fossil", "amount": 25 },
+                            { "type": "RESOURCE", "id": "sand", "amount": 25 }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,132 @@
+{
+    "templateName": "critter",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Drecko",
+    "morphs": ["Drecko", "Glossy Drecko"],
+    "defaultMorph": "Drecko",
+    "baseReproduction": 0.01,
+    "adultLifespan": 145,
+    "additionalSettings": [
+        { "type": "NUMBER", "name": "Percent time in hydrogen", "default": 100 }
+    ],
+    "egg": "drecko_egg",
+    "meat": "meat",
+    "caloriesDropped": 3200,
+
+    "consumeResource": [
+        {
+            "type": "BRANCH",
+            "settingName": "Morph",
+            "branches": [
+                [
+                    "Drecko",
+                    {
+                        "type": "OR",
+                        "resources": [
+                            {
+                                "type": "CONVERTER",
+                                "id": "pincha_pepperplant",
+                                "amount": {
+                                    "type": "SETTING",
+                                    "name": "Wild",
+                                    "true": [4, 0.75],
+                                    "false": [1, 0.75]
+                                },
+                                "amountPreview": [1, 0.75]
+                            },
+                            {
+                                "type": "CONVERTER",
+                                "id": "balm_lily",
+                                "amount": {
+                                    "type": "SETTING",
+                                    "name": "Wild",
+                                    "true": [4, 0.75],
+                                    "false": [1, 0.75]
+                                },
+                                "amountPreview": [1, 0.75]
+                            },
+                            {
+                                "type": "CONVERTER",
+                                "id": "mealwood",
+                                "amount": {
+                                    "type": "SETTING",
+                                    "name": "Wild",
+                                    "true": [4, 0.75],
+                                    "false": [1, 0.75]
+                                },
+                                "amountPreview": [1, 0.75]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Glossy Drecko",
+                    {
+                        "type": "OR",
+                        "resources": [
+                            {
+                                "type": "CONVERTER",
+                                "id": "mealwood",
+                                "amount": {
+                                    "type": "SETTING",
+                                    "name": "Wild",
+                                    "true": 4,
+                                    "false": 1
+                                },
+                                "amountPreview": 1
+                            },
+                            {
+                                "type": "CONVERTER",
+                                "id": "balm_lily",
+                                "amount": {
+                                    "type": "SETTING",
+                                    "name": "Wild",
+                                    "true": 4,
+                                    "false": 1
+                                },
+                                "amountPreview": 1
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ],
+
+    "produceResource": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Morph",
+                "options": [
+                    ["Drecko", 10],
+                    ["Glossy Drecko", 9]
+                ]
+            },
+            "resource": { "type": "RESOURCE", "id": "phosphorite", "amount": 1 }
+        },
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "DIV",
+                "value1": { "type": "SETTING", "name": "Percent time in hydrogen" },
+                "value2": 100
+            },
+            "resource": {
+                "type": "BRANCH",
+                "settingName": "Morph",
+                "branches": [
+                    [
+                        "Drecko",
+                        { "type": "RESOURCE", "id": "reed_fiber", "amount": [2, 8] }
+                    ],
+                    [
+                        "Glossy Drecko",
+                        { "type": "RESOURCE", "id": "plastic", "amount": [150, 3] }
+                    ]
+                ]
+            }
+        }
+    ]
+}

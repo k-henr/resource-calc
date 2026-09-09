@@ -1,0 +1,10 @@
+{
+    "consumes": [
+        { "type": "RESOURCE", "id": "beetiny", "amount": [1, 5] },
+        { "type": "RESOURCE", "id": "uranium_ore", "amount": 2 }
+    ],
+    "produces": [
+        { "type": "RESOURCE", "id": "enriched_uranium", "amount": [9, 5] },
+        { "type": "RESOURCE", "id": "solid_nuclear_waste", "amount": [1, 5] }
+    ]
+}

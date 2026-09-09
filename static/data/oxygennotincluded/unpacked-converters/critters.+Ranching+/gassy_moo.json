@@ -1,0 +1,73 @@
+{
+    "templateName": "critter-2%",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Gassy Moo",
+    "morphs": ["Gassy Moo", "Husky Moo"],
+    "defaultMorph": "Gassy Moo",
+    "meat": "meat",
+    "caloriesDropped": 16000,
+    "egg": "gassy_mooteor",
+    "consumeResource": [
+        {
+            "type": "OR",
+            "resources": [
+                {
+                    "type": "RESOURCE",
+                    "id": "plant_husk",
+                    "amount": 200
+                },
+                {
+                    "type": "CONVERTER",
+                    "id": "gas_grass",
+                    "amount": {
+                        "type": "SETTING",
+                        "name": "Wild",
+                        "true": 8,
+                        "false": 2
+                    },
+                    "amountPreview": 2
+                }
+            ]
+        }
+    ],
+    "produceResource": [
+        {
+            "type": "BRANCH",
+            "settingName": "Morph",
+            "branches": [
+                [
+                    "Gassy Moo",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            {
+                                "type": "RESOURCE",
+                                "id": "natural_gas",
+                                "amount": 10
+                            },
+                            { "type": "RESOURCE", "id": "brackene", "amount": 50 }
+                        ]
+                    }
+                ],
+                [
+                    "Husky Moo",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            {
+                                "type": "RESOURCE",
+                                "id": "carbon_dioxide",
+                                "amount": 10
+                            },
+                            {
+                                "type": "RESOURCE",
+                                "id": "biodiesel",
+                                "amount": 100
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ]
+}

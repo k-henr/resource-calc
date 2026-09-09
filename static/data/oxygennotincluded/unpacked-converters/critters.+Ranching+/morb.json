@@ -1,0 +1,4 @@
+{
+    "consumes": [],
+    "produces": [{ "type": "RESOURCE", "id": "polluted_oxygen", "amount": [12, 10] }]
+}

@@ -1,0 +1,564 @@
+:root {
+    --background-color: #a1a1a9;
+
+    --muted-border: #787880;
+    --muted-background: #8d8d95;
+    --muted-background-hover: #7d7d85;
+    --muted-background-active: #6d6d75;
+
+    --primary-border: #6495ed;
+    --primary-border-hover: #5485dd;
+    --primary-border-active: #4475cd;
+    --primary-background: #9ebaee;
+    --primary-background-hover: #8eaade;
+    --primary-background-active: #7e9ace;
+
+    --red-border: #a55040;
+    --red-background: #b55545;
+    --red-border-hover: #954030;
+    --red-background-hover: #a54535;
+    --red-border-active: #853020;
+    --red-background-active: #953525;
+}
+
+body {
+    height: 100%;
+    margin: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    padding: 4px;
+    border-top: 4px solid var(--muted-border);
+    font-size: small;
+    text-align: center;
+}
+
+/* Main/shared stuff */
+
+main {
+    display: flex;
+    flex: 1;
+    height: 100%;
+
+    & > section {
+        padding: 16px;
+
+        &:first-child {
+            border-right: 4px solid var(--muted-border);
+        }
+    }
+}
+
+.remove-converter-button {
+    display: flex; /* Gets rid of weird 3px button line padding. Can also use line-height:0 */
+    padding: 4px;
+}
+
+#add-rc-tag-list {
+    width: 100%;
+    text-align: center;
+}
+
+.tag-list-header {
+    display: flex;
+    gap: 8px;
+    background-color: var(--muted-background);
+    margin: 8px 0px;
+    padding: 8px;
+
+    & button {
+        width: 32px;
+        aspect-ratio: 1;
+        & img {
+            width: 24px;
+            aspect-ratio: 1;
+        }
+    }
+}
+
+.tag-list-name {
+    font-size: larger;
+    font-weight: bold;
+}
+
+#resources,
+.tag-list-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    justify-content: start;
+    align-content: start;
+    gap: 4px;
+}
+
+.tag-list-content {
+    width: 100%;
+    flex: 1;
+
+    overflow-y: auto;
+}
+
+.thumb {
+    height: 120px;
+    box-sizing: border-box;
+
+    border-width: 4px;
+    border-style: solid;
+
+    flex-direction: column;
+    padding: 4px;
+    gap: 4px;
+
+    /* Doesn't look great, but better than the alternative for now */
+    word-break: break-word;
+
+    & img {
+        flex: 1;
+        max-width: 100%;
+        max-height: 100%;
+        min-height: 0; /*Prevent minimum size from overflowing box*/
+        object-fit: contain;
+    }
+}
+
+.resource-amount,
+.resource-delta-unit {
+    font-size: unset;
+}
+
+#open-item-delta-menu-button,
+#open-converter-menu-button {
+    width: 100%;
+    height: 64px;
+
+    border-width: 2px;
+
+    font-size: large;
+    gap: 8px;
+}
+
+#converters,
+#resources {
+    margin: 4px 0px;
+}
+#converters {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.converter {
+    border-width: 4px;
+    border-style: solid;
+
+    padding: 8px;
+
+    & > .converter-details {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    & > .converter-dependencies {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        & > * {
+            margin-top: 8px;
+        }
+    }
+}
+
+.converter-image {
+    min-height: 0px;
+    height: 100%;
+}
+
+.converter-amount {
+    width: 96px;
+    min-height: 80%;
+
+    text-align: center;
+    font-size: large;
+}
+
+.input-invalid-amount {
+    background-color: var(--red-background);
+}
+
+#add-rc-menu-wrapper,
+#loading-screen {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+}
+
+#loading-screen {
+    flex-direction: column;
+
+    & > * {
+        border-width: 2px;
+        border-style: solid;
+        padding: 24px;
+        width: 20%;
+    }
+}
+
+#add-rc-menu {
+    margin: 32px 128px;
+    box-sizing: border-box;
+
+    background-color: var(--background-color);
+    box-shadow: black 0px 0px 50px;
+
+    padding: 32px;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#add-resource-header,
+#add-converter-header {
+    width: 100%;
+
+    & > h2 {
+        text-align: left;
+        margin: 16px 32px;
+    }
+
+    & > button {
+        padding: 16px;
+        gap: 8px;
+        font-size: larger;
+    }
+}
+
+#rc-detail-popup,
+#converter-dependency-popup {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    max-height: 75%;
+    overflow-y: auto;
+
+    border: var(--muted-border) 2px solid;
+
+    padding: 16px;
+    background-color: var(--background-color);
+    box-shadow: black 0px 0px 50px;
+
+    & > *:not(:first-child) {
+        margin-top: 4px;
+    }
+}
+
+input {
+    &[type="text"] {
+        border: 2px solid var(--muted-border);
+        border-radius: 4px;
+        background-color: transparent;
+        transition: color 0.2s;
+
+        &.input-invalid-amount {
+            background-color: var(--red-background);
+            border-color: var(--red-border);
+        }
+    }
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#rc-info-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow-y: auto;
+
+    & > * {
+        width: 100%;
+    }
+}
+
+.rc-info-image {
+    height: 32px;
+}
+
+.rc-form-option {
+    display: flex;
+    margin: 4px;
+    gap: 8px;
+}
+
+.rc-submit-button {
+    padding: 8px;
+    font-size: large;
+    border-width: 2px;
+}
+
+.converter-ingredient,
+.converter-select {
+    border: 2px solid var(--muted-border);
+    border-radius: 2px;
+    background-color: var(--muted-background);
+
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.converter-select-children,
+.converter-child-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.converter-ingredient {
+    height: 32px;
+    padding: 4px;
+
+    & > div {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.converter-select {
+    height: 12px;
+}
+.converter-select-children {
+    overflow-y: auto;
+}
+
+.converter-select-children > * {
+    padding: 4px;
+}
+
+.image-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.converter-ingredient-image {
+    min-height: 0px;
+    max-width: 32px;
+    height: 100%;
+    object-fit: contain;
+}
+
+.resource-info {
+    display: flex;
+    align-items: center;
+}
+
+.resource-tree-container {
+    display: flex;
+    align-items: center;
+}
+
+/* ===== */
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+.flex-2 {
+    flex: 2;
+}
+.flex-3 {
+    flex: 3;
+}
+
+.horiz-padding {
+    width: 16px;
+}
+
+.small-text {
+    font-size: smaller;
+}
+
+.muted {
+    border-color: var(--muted-border);
+    background-color: var(--muted-background);
+
+    &:not(select).interactive {
+        &:hover {
+            background-color: var(--muted-background-hover);
+        }
+        &:active {
+            background-color: var(--muted-background-active);
+        }
+    }
+}
+.primary {
+    border-color: var(--primary-border);
+    background-color: var(--primary-background);
+
+    &:not(select).interactive {
+        &:hover {
+            background-color: var(--primary-background-hover);
+            border-color: var(--primary-border-hover);
+        }
+        &:active {
+            background-color: var(--primary-background-active);
+            border-color: var(--primary-border-active);
+        }
+    }
+}
+.red {
+    border-color: var(--red-border);
+    background-color: var(--red-background);
+
+    &:not(select).interactive {
+        &:hover {
+            background-color: var(--red-background-hover);
+            border-color: var(--red-border-hover);
+        }
+        &:active {
+            background-color: var(--red-background-active);
+            border-color: var(--red-border-active);
+        }
+    }
+}
+
+.interactive {
+    border-radius: 4px;
+    border-style: solid;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &:active {
+        transition-duration: 0s;
+    }
+}
+
+.no-bg {
+    background-color: transparent;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hidden {
+    /* I dislike using !important outside of browser extensions, but I can't make
+    this more specific and it has to override everything */
+    display: none !important;
+}
+
+@media screen and (max-width: 800px) {
+    main {
+        flex-direction: column-reverse;
+    }
+
+    #resources,
+    .tag-list-content {
+        grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+
+        & .thumb {
+            height: 96px;
+            font-size: smaller;
+        }
+    }
+
+    #resources {
+        grid-auto-flow: column;
+        grid-template-rows: 96px 96px;
+        overflow-x: auto;
+
+        & .thumb {
+            width: 96px;
+        }
+    }
+
+    #add-rc-menu {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0px;
+        padding: 16px;
+        box-shadow: none;
+        border: none;
+    }
+    #rc-detail-popup,
+    #converter-dependency-popup {
+        width: 90%;
+    }
+
+    #converter-wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .converter {
+        flex-direction: column;
+        height: fit-content;
+        align-items: start;
+        gap: 8px;
+        & > .converter-details {
+            gap: 8px;
+
+            & > div {
+                width: 100%;
+            }
+            & .converter-image {
+                height: 32px;
+            }
+        }
+    }
+
+    main > section {
+        padding: 8px;
+
+        &:first-child {
+            border-right: none;
+        }
+    }
+
+    #resource-section {
+        flex: none;
+    }
+
+    .resource-tree-container {
+        flex-direction: column;
+        & > div {
+            width: 100%;
+        }
+        & > img {
+            rotate: 90deg;
+        }
+    }
+
+    .converter-ingredient {
+        overflow-x: auto;
+    }
+
+    .rc-form-option {
+        display: block;
+
+        & input[type="text"] {
+            width: 72px;
+        }
+    }
+}

@@ -1,0 +1,81 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": [
+                "Metal Power Bank",
+                "Oxygen Mask",
+                "Plastic Gasket",
+                "Rubber Gasket",
+                "Uranium Ore Power Bank"
+            ],
+            "default": "Plastic Gasket"
+        }
+    ],
+    "consumes": [
+        { "type": "RESOURCE", "id": "power", "amount": [60, 15] },
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Oxygen Mask",
+                    { "type": "TAG", "tagName": "&Unrefined Ore", "amount": 50 }
+                ],
+                [
+                    "Metal Power Bank",
+                    { "type": "TAG", "tagName": "&Unrefined Ore", "amount": 200 }
+                ],
+                [
+                    "Uranium Ore Power Bank",
+                    { "type": "RESOURCE", "id": "uranium_ore", "amount": 10 }
+                ],
+                [
+                    "Rubber Gasket",
+                    { "type": "RESOURCE", "id": "rubber", "amount": 50 }
+                ],
+                [
+                    "Plastic Gasket",
+                    { "type": "RESOURCE", "id": "plastic", "amount": 50 }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Oxygen Mask",
+                    { "type": "RESOURCE", "id": "oxygen_mask", "amount": 1 }
+                ],
+                [
+                    "Metal Power Bank",
+                    {
+                        "type": "RESOURCE",
+                        "id": "metal_power_bank",
+                        "amount": 120000
+                    }
+                ],
+                [
+                    "Uranium Ore Power Bank",
+                    {
+                        "type": "RESOURCE",
+                        "id": "uranium_ore_power_bank",
+                        "amount": 120000
+                    }
+                ],
+                [
+                    "Rubber Gasket",
+                    { "type": "RESOURCE", "id": "rubber_gasket", "amount": 1 }
+                ],
+                [
+                    "Plastic Gasket",
+                    { "type": "RESOURCE", "id": "plastic_gasket", "amount": 1 }
+                ]
+            ]
+        }
+    ]
+}

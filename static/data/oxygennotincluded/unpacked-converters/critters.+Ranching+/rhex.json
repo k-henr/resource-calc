@@ -1,0 +1,33 @@
+{
+    "templateName": "critter-2%",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Rhex",
+    "morphs": ["Rhex"],
+    "defaultMorph": "Rhex",
+    "meat": "tough_meat",
+    "caloriesDropped": 5,
+    "egg": "rhex_egg",
+    "consumeResource": [
+        {
+            "type": "OR",
+            "resources": [
+                { "type": "RESOURCE", "id": "tough_meat", "amount": 0.5 },
+                { "type": "RESOURCE", "id": "meat", "amount": 800 },
+                { "type": "RESOURCE", "id": "dartle_egg", "amount": 1 },
+                { "type": "RESOURCE", "id": "pip_egg", "amount": 0.5 },
+                { "type": "RESOURCE", "id": "divergent_egg", "amount": 0.5 },
+                { "type": "RESOURCE", "id": "flox_egg", "amount": 0.5 },
+                { "type": "RESOURCE", "id": "hatch_egg", "amount": 0.25 },
+                { "type": "RESOURCE", "id": "drecko_egg", "amount": 0.25 },
+                { "type": "RESOURCE", "id": "slickster_egg", "amount": 0.25 },
+                { "type": "RESOURCE", "id": "shove_vole_egg", "amount": [1, 20] },
+                { "type": "RESOURCE", "id": "lumb_egg", "amount": [1, 24] },
+                { "type": "RESOURCE", "id": "bammoth_egg", "amount": [1, 28] }
+            ]
+        }
+    ],
+    "produceResource": [
+        { "type": "RESOURCE", "id": "brine_ice", "amount": 64 },
+        { "type": "RESOURCE", "id": "feather_fiber", "amount": 1 }
+    ]
+}

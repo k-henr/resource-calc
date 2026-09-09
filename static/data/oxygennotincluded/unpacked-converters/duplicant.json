@@ -1,0 +1,163 @@
+{
+    "displayName": "Duplicant{Bottomless stomach| (bottomless stomach)}{Mouth breather| (mouth breather)}",
+    "thumbName": "Duplicant",
+    "settings": [
+        { "type": "TOGGLE", "name": "Bottomless stomach", "default": false },
+        { "type": "TOGGLE", "name": "Mouth breather", "default": false },
+        { "type": "TOGGLE", "name": "Diver's Lungs", "default": false },
+        { "type": "TOGGLE", "name": "Deep Diver's Lungs", "default": false },
+        {
+            "type": "ENUMERATE",
+            "name": "Waste expelled by",
+            "default": "Lavatory",
+            "options": ["Lavatory", "Outhouse", "Accident"]
+        }
+    ],
+    "consumes": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Bottomless stomach",
+                "true": 1.5,
+                "false": 1
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "food",
+                "amount": 1000
+            }
+        },
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "ADD",
+                "values": [
+                    60,
+                    {
+                        "type": "SETTING",
+                        "name": "Mouth breather",
+                        "true": 60,
+                        "false": 0
+                    },
+                    {
+                        "type": "SETTING",
+                        "name": "Diver's Lungs",
+                        "true": -15,
+                        "false": 0
+                    },
+                    {
+                        "type": "SETTING",
+                        "name": "Deep Diver's Lungs",
+                        "true": -30,
+                        "false": 0
+                    }
+                ]
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "oxygen",
+                "amount": 1
+            }
+        },
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Waste expelled by",
+                "options": [
+                    ["Lavatory", 5],
+                    [["Outhouse", "Accident"], 0]
+                ]
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "water",
+                "amount": 1
+            }
+        },
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Waste expelled by",
+                "options": [
+                    ["Outhouse", 1],
+                    [["Lavatory", "Accident"], 0]
+                ]
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "dirt",
+                "amount": 13
+            }
+        }
+    ],
+    "produces": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "ADD",
+                "values": [
+                    1.2,
+                    {
+                        "type": "SETTING",
+                        "name": "Mouth breather",
+                        "true": 1.2,
+                        "false": 0
+                    },
+                    {
+                        "type": "SETTING",
+                        "name": "Diver's Lungs",
+                        "true": -0.3,
+                        "false": 0
+                    },
+                    {
+                        "type": "SETTING",
+                        "name": "Deep Diver's Lungs",
+                        "true": -0.6,
+                        "false": 0
+                    }
+                ]
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "carbon_dioxide",
+                "amount": 1
+            }
+        },
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Waste expelled by",
+                "options": [
+                    ["Lavatory", 11.7],
+                    ["Outhouse", 0],
+                    ["Accident", 2]
+                ]
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "polluted_water",
+                "amount": 1
+            }
+        },
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Waste expelled by",
+                "options": [
+                    ["Outhouse", 1],
+                    [["Lavatory", "Accident"], 0]
+                ]
+            },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "polluted_dirt",
+                "amount": 19.7
+            }
+        }
+    ]
+}

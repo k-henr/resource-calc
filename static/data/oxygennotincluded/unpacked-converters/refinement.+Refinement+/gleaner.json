@@ -1,0 +1,62 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": ["Brackwax", "Caviar"],
+            "default": "Brackwax"
+        }
+    ],
+    "consumes": [
+        { "type": "RESOURCE", "id": "power", "amount": [480, 15] },
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Brackwax",
+                    { "type": "RESOURCE", "id": "brackene", "amount": 600 }
+                ],
+                ["Caviar", { "type": "RESOURCE", "id": "ovolene", "amount": 600 }]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Brackwax",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "brackwax", "amount": 54 },
+                            { "type": "RESOURCE", "id": "brine", "amount": 486 },
+                            {
+                                "type": "RESOURCE",
+                                "id": "carbon_dioxide",
+                                "amount": 60
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Caviar",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "caviar", "amount": 54 },
+                            { "type": "RESOURCE", "id": "mucin", "amount": 486 },
+                            {
+                                "type": "RESOURCE",
+                                "id": "carbon_dioxide",
+                                "amount": 60
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ]
+}

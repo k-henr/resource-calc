@@ -1,0 +1,56 @@
+{
+    "templateName": "heavy_generator",
+    "displayName": "Steam Turbine ({Steam temperature}°C)",
+    "thumbName": "Steam Turbine",
+    "additionalSettings": [
+        {
+            "type": "NUMBER",
+            "name": "Flow rate",
+            "default": 2,
+            "unit": "kg/s"
+        },
+        {
+            "type": "NUMBER",
+            "name": "Steam temperature",
+            "default": 125
+        }
+    ],
+    "consumes": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": { "type": "SETTING", "name": "Flow rate" },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "steam",
+                "amount": 600
+            }
+        }
+    ],
+    "tunedProduct": {
+        "type": "MULTIPLIER",
+        "multiplier": {
+            "type": "MUL",
+            "values": [
+                [85, 21],
+                { "type": "SETTING", "name": "Flow rate", "default": 2 },
+                {
+                    "type": "SUB",
+                    "value1": { "type": "SETTING", "name": "Steam temperature" },
+                    "value2": 95
+                }
+            ]
+        },
+        "resource": { "type": "RESOURCE", "id": "power", "amount": 1 }
+    },
+    "additionalProducts": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": { "type": "SETTING", "name": "Flow rate" },
+            "resource": {
+                "type": "RESOURCE",
+                "id": "water",
+                "amount": 600
+            }
+        }
+    ]
+}

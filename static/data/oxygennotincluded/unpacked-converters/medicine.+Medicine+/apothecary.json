@@ -1,0 +1,173 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": [
+                "Vitamin Chews",
+                "Immuno Booster",
+                "Basic Rad Pill",
+                "Curative Tablet",
+                "Allergy Medication",
+                "Medical Pack",
+                "Serum Vial",
+                "Gear Balm",
+                "Tallow Gear Balm"
+            ],
+            "default": "Vitamin Chews"
+        }
+    ],
+    "consumes": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                ["Vitamin Chews", { "type": "RESOURCE", "id": "coal", "amount": 1 }],
+                [
+                    "Immuno Booster",
+                    { "type": "RESOURCE", "id": "pincha_peppernut", "amount": 1 }
+                ],
+                [
+                    "Basic Rad Pill",
+                    { "type": "RESOURCE", "id": "coal", "amount": 1 }
+                ],
+                [
+                    "Curative Tablet",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "coal", "amount": 1 },
+                            { "type": "RESOURCE", "id": "water", "amount": 1 }
+                        ]
+                    }
+                ],
+                [
+                    "Allergy Medication",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "dirt", "amount": 1 },
+                            {
+                                "type": "OR",
+                                "resources": [
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "blossom_seed",
+                                        "amount": 1
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "seakomb_leaf",
+                                        "amount": 10
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Medical Pack",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            {
+                                "type": "RESOURCE",
+                                "id": "balm_lily_flower",
+                                "amount": 1
+                            },
+                            { "type": "RESOURCE", "id": "phosphorite", "amount": 1 }
+                        ]
+                    }
+                ],
+                [
+                    "Serum Vial",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "steel", "amount": 1 },
+                            {
+                                "type": "RESOURCE",
+                                "id": "shine_bug_egg",
+                                "amount": 1
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Gear Balm",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "water", "amount": 200 },
+                            { "type": "RESOURCE", "id": "gunk", "amount": 80 }
+                        ]
+                    }
+                ],
+                [
+                    "Tallow Gear Balm",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "water", "amount": 70 },
+                            { "type": "RESOURCE", "id": "tallow", "amount": 10 }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Vitamin Chews",
+                    { "type": "RESOURCE", "id": "vitamin_chews", "amount": 1 }
+                ],
+                [
+                    "Immuno Booster",
+                    { "type": "RESOURCE", "id": "immuno_booster", "amount": 1 }
+                ],
+                [
+                    "Basic Rad Pill",
+                    { "type": "RESOURCE", "id": "basic_rad_pill", "amount": 1 }
+                ],
+                [
+                    "Curative Tablet",
+                    { "type": "RESOURCE", "id": "curative_tablet", "amount": 1 }
+                ],
+                [
+                    "Allergy Medication",
+                    { "type": "RESOURCE", "id": "allergy_medication", "amount": 1 }
+                ],
+                [
+                    "Medical Pack",
+                    { "type": "RESOURCE", "id": "medical_pack", "amount": 1 }
+                ],
+                [
+                    "Serum Vial",
+                    { "type": "RESOURCE", "id": "serum_vial", "amount": 1 }
+                ],
+                [
+                    "Gear Balm",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "gear_balm", "amount": 1 },
+                            {
+                                "type": "RESOURCE",
+                                "id": "polluted_water",
+                                "amount": 200
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Tallow Gear Balm",
+                    { "type": "RESOURCE", "id": "tallow_gear_balm", "amount": 1 }
+                ]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "templateName": "critter",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Grubgrub",
+    "morphs": ["Grubgrub"],
+    "defaultMorph": "Grubgrub",
+    "meat": "meat",
+    "caloriesDropped": 4800,
+    "baseReproduction": 0.01,
+    "adultLifespan": 145,
+    "egg": "divergent_egg",
+    "consumeResource": [
+        {
+            "type": "ENTANGLED_OR",
+            "id": "diet",
+            "resources": [
+                ["sulfur", { "type": "RESOURCE", "id": "sulfur", "amount": 50 }],
+                ["sucrose", { "type": "RESOURCE", "id": "sucrose", "amount": 30 }]
+            ]
+        }
+    ],
+    "produceResource": [
+        {
+            "type": "ENTANGLED_OR",
+            "id": "diet",
+            "resources": [
+                ["sulfur", { "type": "RESOURCE", "id": "mud", "amount": 5 }],
+                ["sucrose", { "type": "RESOURCE", "id": "mud", "amount": 30 }]
+            ]
+        }
+    ]
+}

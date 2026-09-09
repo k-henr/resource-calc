@@ -1,0 +1,315 @@
+<script lang="ts">
+	import { page } from '$app/state';
+	import { onMount } from 'svelte';
+
+	onMount(async () => {
+		const game = page.params.game;
+		const app = await import('$lib/calculator-app.js');
+		console.log(app);
+		app.run(game);
+	});
+</script>
+
+<main>
+	<section class="flex-3 converter-section">
+		<h2>Converters</h2>
+		<div id="converter-wrapper">
+			<div id="converters">
+				<!-- Contains converters that are used and the "number" of conversions required -->
+			</div>
+			<button id="open-converter-menu-button" class="primary interactive center">
+				<img src="icons/add.svg" alt="Add converter" />
+				Add new converter
+			</button>
+		</div>
+	</section>
+	<section class="flex-2" id="resource-section">
+		<h2>Resources</h2>
+		<div id="resources">
+			<!-- Contains resources and their rate of consumption/production -->
+		</div>
+		<button id="open-item-delta-menu-button" class="interactive primary center">
+			<img src="icons/add.svg" alt="Add resource source or drain" />
+			Add new resource source/drain
+		</button>
+	</section>
+</main>
+<footer>
+	<small>
+		<span id="personal-legal-disclaimer"></span>
+		Icons from Google Fonts.<br />The data is added by hand. If something is wrong or missing,
+		please
+		<a href="https://github.com/k-henr/resource-graphs/issues/new">make a github issue</a>!
+	</small>
+</footer>
+
+<!-- Menu for adding resources or converters to the graph -->
+<div id="add-rc-menu-wrapper" class="hidden">
+	<div id="add-rc-menu" class="center">
+		<div id="add-resource-header" class="hidden center">
+			<h2 class="flex-1">Add Resource source/drain</h2>
+			<button id="close-resource-menu-button" class="muted interactive center">
+				<img src="/icons/close.svg" alt="Close menu" />
+				CLOSE
+			</button>
+		</div>
+		<div id="add-converter-header" class="hidden center">
+			<h2 class="flex-1">Add Converter</h2>
+			<button id="close-converter-menu-button" class="muted interactive center">
+				<img src="/icons/close.svg" alt="Close menu" />
+				CLOSE
+			</button>
+		</div>
+		<!-- Filter form for when adding resources. -->
+		<form id="resource-filter-form" class="hidden">
+			<label for="search-string">Search</label>
+			<input type="text" name="search-string" autocomplete="off" />
+		</form>
+		<!-- Filter form for when adding converters. Currently the same as
+                 the resource form, but different elements due to listeners being
+                 different. Can also be expanded later, so I think it's reasonable to
+                 keep them separate -->
+		<form id="converter-filter-form" class="hidden">
+			<label for="search-string">Search</label>
+			<input type="text" name="search-string" autocomplete="off" />
+		</form>
+		<div id="add-rc-tag-list">
+			<!-- All resource/converter thumbs are loaded in here -->
+			<div class="tag-list-content"></div>
+		</div>
+	</div>
+
+	<div id="rc-detail-popup" class="hidden">
+		<div id="rc-info-panel" class="flex-2"></div>
+		<div class="flex-1">
+			<form
+				id="resource-submission-form"
+				class="popup-form hidden"
+				onsubmit={(event) => event.preventDefault()}
+			>
+				<div class="rc-form-option">
+					<label for="delta">Rate of change</label>
+					<input
+						type="text"
+						name="delta"
+						value="1"
+						autocomplete="off"
+						onkeydown={(event) => {
+							// Prevent enter from submitting the form
+							if (event.key === 'Enter') {
+								event.preventDefault();
+								return false;
+							}
+						}}
+					/>
+					<select id="resource-unit-select"></select>
+				</div>
+				<div>
+					<button type="submit" class="primary interactive rc-submit-button"> Add Resource </button>
+					<button type="button" id="close-item-popup-button" class="interactive rc-submit-button">
+						Cancel
+					</button>
+				</div>
+			</form>
+			<div id="converter-specific-footer">
+				<form
+					id="converter-settings-form"
+					class="popup-form"
+					onsubmit={(event) => event.preventDefault()}
+				></form>
+				<form id="converter-submission-form" class="popup-form hidden">
+					<div id="converter-amount-input">
+						<div class="rc-form-option">
+							<label for="amount">Number of converters</label>
+							<input
+								type="text"
+								name="amount"
+								value="1"
+								autocomplete="off"
+								onkeydown={(event) => {
+									// Prevent enter from submitting the form
+									if (event.key === 'Enter') {
+										event.preventDefault();
+										return false;
+									}
+								}}
+							/>
+						</div>
+					</div>
+					<div>
+						<button type="submit" class="primary interactive rc-submit-button">
+							Add Converter
+						</button>
+						<button
+							type="button"
+							id="close-converter-popup-button"
+							class="interactive rc-submit-button"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="converter-dependency-popup" class="hidden">
+		<h1>
+			Resolve ingredients for the consumed
+			<span id="converter-dependency-name"></span>:
+		</h1>
+		<div id="converter-dependency-tree" class="flex-1"></div>
+		<form id="converter-dependency-settings-form" class="popup-form"></form>
+		<form class="popup-form" onsubmit={(event) => event.preventDefault()}>
+			<div>
+				Number of converters needed per
+				<span id="converter-dependency-primary-name"></span>:
+				<span id="converter-dependency-amount">5</span>
+			</div>
+			<button id="submit-depencency" class="primary interactive rc-submit-button"> Accept </button>
+		</form>
+	</div>
+</div>
+
+<div id="loading-screen" class="center">
+	<p class="muted center">Loading...</p>
+</div>
+
+<!-------------------------------------------------------------------------->
+
+<!-- Template for a resource displayed in the resource list -->
+<template id="resource-delta-template">
+	<div class="thumb center muted">
+		<img class="resource-image" alt="Resource icon" />
+		<div class="resource-name small-text"></div>
+		<div>
+			<b class="resource-amount"></b>
+			<span class="resource-delta-unit"></span>
+		</div>
+	</div>
+</template>
+
+<!-- Template for a resource converter displayed in the converter list -->
+<template id="converter-template">
+	<div class="converter muted">
+		<div class="converter-details">
+			<img class="converter-image" alt="Converter icon" />
+			<div class="converter-name"></div>
+			⨉
+			<input type="text" class="converter-amount" />
+			=
+			<div class="converter-decimal-approx"></div>
+			<div class="flex-1"></div>
+			<!-- TODO: Visuals of what it converts? Just using images -->
+			<button class="remove-converter-button red interactive">
+				<img src="icons/delete.svg" alt="Delete converter" />
+			</button>
+		</div>
+		<div class="converter-dependencies"></div>
+	</div>
+</template>
+
+<!-- Template for a tag folder used in rc menu -->
+<template id="tag-list-template">
+	<section>
+		<div class="tag-list-header">
+			<button class="muted interactive center">
+				<img src="/icons/expand.svg" alt="Expand folder" />
+			</button>
+			<div class="tag-list-name center flex-1">TAG LIST:</div>
+		</div>
+		<div class="tag-list-content"></div>
+	</section>
+</template>
+
+<!-- Template for an item or converter thumb in the selection lists -->
+<template id="item-converter-thumb">
+	<div class="thumb center interactive muted">
+		<img class="thumb-image" alt="Converter icon" />
+		<div class="thumb-name"></div>
+	</div>
+</template>
+
+<!-- Template for the info panel's look when selecting a resource -->
+<template id="resource-info-template">
+	<div class="resource-info">
+		<img class="rc-info-image" alt="Resource icon" />
+		<h2 class="rc-info-header">error</h2>
+	</div>
+</template>
+
+<!-- Template for the info panel's look when selecting a converter -->
+<template id="converter-info-template">
+	<div>
+		<div class="image-heading">
+			<img class="rc-info-image" alt="Converter icon" />
+			<h2 class="rc-info-header">error</h2>
+		</div>
+		<div class="resource-tree-container">
+			<div class="c-info-ingredients flex-1"></div>
+			<img src="icons/arrow_right.svg" alt="Converts to" />
+			<div class="c-info-products flex-1"></div>
+		</div>
+	</div>
+</template>
+
+<!-- Template for a custom per-converter input setting -->
+<template id="converter-setting-input-template">
+	<div class="rc-form-option">
+		<!-- svelte-ignore a11y_label_has_associated_control -->
+		<label></label>
+		<input class="muted" />
+		<span></span>
+	</div>
+</template>
+<!-- Template for a custom per-converter select setting -->
+<template id="converter-setting-select-template">
+	<div class="rc-form-option">
+		<!-- svelte-ignore a11y_label_has_associated_control -->
+		<label></label>
+		<select class="muted interactive no-bg"></select>
+	</div>
+</template>
+
+<!-- Template for elements in converters' infoboxes' lists of ingredients/products -->
+<template id="converter-ingredient-template">
+	<div class="converter-ingredient image-heading">
+		<img class="converter-ingredient-image" alt="Ingredient icon" />
+		<div>
+			<div class="converter-ingredient-name"></div>
+			⨉
+			<div class="converter-ingredient-amount"></div>
+		</div>
+	</div>
+</template>
+
+<!-- Template for OR elements in converters ingr/prod trees -->
+<template id="converter-select-template">
+	<!-- Wrapper div is needed because when nesting ORs, the dictionary in the outer OR has to keep referring to the right element even after the inner OR has collapsed -->
+	<div>
+		<div class="converter-child-list">
+			<div class="converter-ingredient converter-select">
+				SELECT ONE OF
+				<span class="converter-select-count"></span> OPTIONS:
+			</div>
+			<div class="flex">
+				<div class="horiz-padding"></div>
+				<div class="converter-select-children flex-1"></div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- Template for the different option "boxes" in ORs -->
+<template id="converter-option-template">
+	<div class="primary interactive"></div>
+</template>
+
+<!-- Another template for handling ORs, this one is inserted in between the options -->
+<template id="converter-or-template">
+	<div class="converter-ingredient converter-select">OR</div>
+</template>
+
+<div>
+	<scipt src="/calculator-app.js"></scipt>
+</div>

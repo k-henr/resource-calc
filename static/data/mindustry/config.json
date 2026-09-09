@@ -1,0 +1,28 @@
+{
+    "legalDisclaimer": "This project is not associated with Mindustry. Any assets from the game are licensed under GNU General Public License 3.0, in accordance with Mindustry's license.\n",
+
+    "unitGroups": [
+        [
+            "solid",
+            {
+                "default": "items/s",
+                "conversions": []
+            }
+        ],
+        [
+            "liquid",
+            {
+                "default": "units/s",
+                "conversions": []
+            }
+        ],
+        [
+            "power",
+            {
+                "default": "power units/s",
+                "conversions": []
+            }
+        ]
+    ],
+    "defaultUnitGroup": "solid"
+}

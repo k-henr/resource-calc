@@ -1,0 +1,138 @@
+{
+    "tags": ["...TEMPLATE?:additionalTags"],
+    "displayName": "TEMPLATE:displayName",
+    "thumbName": "TEMPLATE:thumbName",
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Morph",
+            "options": "TEMPLATE:morphs",
+            "default": "TEMPLATE:defaultMorph"
+        },
+        { "type": "TOGGLE", "name": "Wild", "default": false },
+        { "type": "TOGGLE", "name": "Cramped", "default": false },
+        {
+            "type": "NUMBER",
+            "name": "Happiness",
+            "default": 4
+        },
+        { "type": "TOGGLE", "name": "Fed", "default": true },
+        "...TEMPLATE?:additionalSettings"
+    ],
+    "consumes": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "SETTING",
+                "name": "Fed",
+                "false": 0,
+                "true": {
+                    "type": "THRESHOLD",
+                    "value": { "type": "SETTING", "name": "Happiness" },
+                    "threshold": 0,
+                    "higherOrEqual": 1,
+                    "lower": 0.2
+                }
+            },
+            "resource": {
+                "type": "AND",
+                "resources": "TEMPLATE:consumeResource"
+            }
+        },
+        "...TEMPLATE?:additionalConsume",
+        {
+            "type": "RESOURCE",
+            "id": "TEMPLATE:egg",
+            "amount": [1, "TEMPLATE:adultLifespan"]
+        }
+    ],
+    "produces": [
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "MUL",
+                "values": [
+                    { "type": "SETTING", "name": "Fed", "true": 1, "false": 0 },
+                    {
+                        "type": "THRESHOLD",
+                        "value": { "type": "SETTING", "name": "Happiness" },
+                        "threshold": 0,
+                        "higherOrEqual": {
+                            "type": "SETTING",
+                            "name": "Wild",
+                            "true": 0.25,
+                            "false": 1
+                        },
+                        "lower": {
+                            "type": "SETTING",
+                            "name": "Wild",
+                            "true": 0.1,
+                            "false": 0.2
+                        }
+                    }
+                ]
+            },
+            "resource": {
+                "type": "AND",
+                "resources": "TEMPLATE:produceResource"
+            }
+        },
+        "...TEMPLATE?:additionalProduce",
+        {
+            "type": "MULTIPLIER",
+            "multiplier": {
+                "type": "DIV",
+                "value1": {
+                    "type": "FLOOR",
+                    "value": {
+                        "type": "MUL",
+                        "values": [
+                            {
+                                "type": "SETTING",
+                                "name": "Cramped",
+                                "true": 0,
+                                "false": 1
+                            },
+                            "TEMPLATE:adultLifespan",
+                            {
+                                "type": "ADD",
+                                "values": [
+                                    "TEMPLATE:baseReproduction",
+                                    {
+                                        "type": "MUL",
+                                        "values": [
+                                            2.25,
+                                            "TEMPLATE:baseReproduction",
+                                            {
+                                                "type": "CLAMP",
+                                                "value": {
+                                                    "type": "SETTING",
+                                                    "name": "Happiness"
+                                                },
+                                                "high": 9999,
+                                                "low": 0
+                                            },
+                                            {
+                                                "type": "SETTING",
+                                                "name": "Wild",
+                                                "true": 0,
+                                                "false": 1
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "value2": "TEMPLATE:adultLifespan"
+            },
+            "resource": { "type": "RESOURCE", "id": "TEMPLATE:egg", "amount": 1 }
+        },
+        {
+            "type": "RESOURCE",
+            "id": "TEMPLATE:meat",
+            "amount": ["TEMPLATE:caloriesDropped", "TEMPLATE:adultLifespan"]
+        }
+    ]
+}

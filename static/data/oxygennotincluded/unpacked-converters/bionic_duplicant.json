@@ -1,0 +1,16 @@
+{
+    "consumes": [
+        { "type": "TAG", "tagName": "&Power Banks", "amount": 200 },
+        {
+            "type": "OR",
+            "resources": [
+                { "type": "RESOURCE", "id": "gear_balm", "amount": [1, 4] },
+                { "type": "RESOURCE", "id": "tallow_gear_balm", "amount": [1, 4] },
+                { "type": "RESOURCE", "id": "crude_oil", "amount": 20 },
+                { "type": "RESOURCE", "id": "phyto_oil", "amount": 20 }
+            ]
+        },
+        { "type": "RESOURCE", "id": "oxygen", "amount": 60 }
+    ],
+    "produces": [{ "type": "RESOURCE", "id": "gunk", "amount": 20 }]
+}

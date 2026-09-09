@@ -1,0 +1,30 @@
+{
+    "templateName": "critter-2%",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Lumb",
+    "morphs": ["Lumb", "Blum Lumb"],
+    "defaultMorph": "Lumb",
+    "meat": "tough_meat",
+    "caloriesDropped": 12,
+    "egg": "lumb_egg",
+    "consumeResource": [
+        {
+            "type": "OR",
+            "resources": [
+                { "type": "RESOURCE", "id": "ovagro_fig", "amount": 1300 },
+                { "type": "RESOURCE", "id": "bristle_berry", "amount": 1300 },
+                { "type": "RESOURCE", "id": "bog_jelly", "amount": 1300 }
+            ]
+        }
+    ],
+    "produceResource": [
+        {
+            "type": "BRANCH",
+            "settingName": "Morph",
+            "branches": [
+                ["Lumb", { "type": "RESOURCE", "id": "peat", "amount": 200 }],
+                ["Blum Lumb", { "type": "RESOURCE", "id": "algae", "amount": 200 }]
+            ]
+        }
+    ]
+}

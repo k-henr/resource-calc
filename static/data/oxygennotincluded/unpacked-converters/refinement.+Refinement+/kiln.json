@@ -1,0 +1,71 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": ["Refined Carbon", "Ceramic"],
+            "default": "Refined Carbon"
+        }
+    ],
+    "consumes": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Refined Carbon",
+                    {
+                        "type": "OR",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "coal", "amount": 1875 },
+                            { "type": "RESOURCE", "id": "wood", "amount": 3000 },
+                            { "type": "RESOURCE", "id": "peat", "amount": 4500 }
+                        ]
+                    }
+                ],
+                [
+                    "Ceramic",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "clay", "amount": 1500 },
+                            {
+                                "type": "OR",
+                                "resources": [
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "coal",
+                                        "amount": 375
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "wood",
+                                        "amount": 375
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "peat",
+                                        "amount": 375
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Refined Carbon",
+                    { "type": "RESOURCE", "id": "refined_carbon", "amount": 1500 }
+                ],
+                ["Ceramic", { "type": "RESOURCE", "id": "ceramic", "amount": 1500 }]
+            ]
+        }
+    ]
+}

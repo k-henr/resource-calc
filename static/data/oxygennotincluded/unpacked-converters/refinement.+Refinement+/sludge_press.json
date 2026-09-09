@@ -1,0 +1,59 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": ["Mud", "Polluted Mud"],
+            "default": "Mud"
+        }
+    ],
+    "consumes": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                ["Mud", { "type": "RESOURCE", "id": "mud", "amount": 300 }],
+                [
+                    "Polluted Mud",
+                    { "type": "RESOURCE", "id": "polluted_mud", "amount": 300 }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Mud",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "dirt", "amount": 120 },
+                            { "type": "RESOURCE", "id": "water", "amount": 180 }
+                        ]
+                    }
+                ],
+                [
+                    "Polluted Mud",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            {
+                                "type": "RESOURCE",
+                                "id": "polluted_dirt",
+                                "amount": 120
+                            },
+                            {
+                                "type": "RESOURCE",
+                                "id": "polluted_water",
+                                "amount": 180
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ]
+}

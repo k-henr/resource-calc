@@ -1,0 +1,58 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": ["Snazzy Suit", "Warm Coat", "Swimwear", "Rubber Boots"],
+            "default": "Snazzy Suit"
+        }
+    ],
+    "consumes": [
+        { "type": "RESOURCE", "id": "power", "amount": 16 },
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    ["Snazzy Suit", "Warm Coat"],
+                    { "type": "TAG", "tagName": "&Fiber", "amount": 4 }
+                ],
+                [
+                    "Swimwear",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "rubber", "amount": 100 },
+                            { "type": "TAG", "tagName": "&Fiber", "amount": 4 }
+                        ]
+                    }
+                ],
+                [
+                    "Rubber Boots",
+                    { "type": "RESOURCE", "id": "rubber", "amount": 50 }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Snazzy Suit",
+                    { "type": "RESOURCE", "id": "snazzy_suit", "amount": 1 }
+                ],
+                [
+                    "Warm Coat",
+                    { "type": "RESOURCE", "id": "warm_coat", "amount": 1 }
+                ],
+                ["Swimwear", { "type": "RESOURCE", "id": "swimwear", "amount": 1 }],
+                [
+                    "Rubber Boots",
+                    { "type": "RESOURCE", "id": "rubber_boots", "amount": 1 }
+                ]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "templateName": "critter",
+    "displayName": "{Cramped|Cramped }{Wild|Wild }{Morph} (happiness {Happiness})",
+    "thumbName": "Dartle",
+    "morphs": ["Dartle"],
+    "defaultMorph": "Dartle",
+    "baseReproduction": 0.03,
+    "adultLifespan": 50,
+    "egg": "dartle_egg",
+    "meat": "meat",
+    "caloriesDropped": 800,
+
+    "consumeResource": [
+        {
+            "type": "RESOURCE",
+            "id": "dewdrip",
+            "amount": 1
+        }
+    ],
+
+    "produceResource": [
+        {
+            "type": "RESOURCE",
+            "id": "bleach_stone",
+            "amount": 10
+        },
+        {
+            "type": "RESOURCE",
+            "id": "chlorine",
+            "amount": 10
+        }
+    ]
+}

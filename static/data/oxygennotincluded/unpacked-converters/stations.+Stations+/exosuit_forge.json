@@ -1,0 +1,110 @@
+{
+    "settings": [
+        {
+            "type": "ENUMERATE",
+            "name": "Recipe",
+            "options": ["Atmo Suit", "Jet Suit", "Lead Suit"],
+            "default": "Atmo Suit"
+        }
+    ],
+    "consumes": [
+        { "type": "RESOURCE", "id": "power", "amount": [480, 15] },
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Atmo Suit",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "TAG", "tagName": "&Fiber", "amount": 2 },
+                            {
+                                "type": "OR",
+                                "resources": [
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "aluminum",
+                                        "amount": 300
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "copper",
+                                        "amount": 300
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "iron",
+                                        "amount": 300
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "cobalt",
+                                        "amount": 300
+                                    },
+                                    {
+                                        "type": "RESOURCE",
+                                        "id": "nickel",
+                                        "amount": 300
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "Jet Suit",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "TAG", "tagName": "&Fiber", "amount": 2 },
+                            { "type": "RESOURCE", "id": "steel", "amount": 200 }
+                        ]
+                    }
+                ],
+                [
+                    "Lead Suit",
+                    {
+                        "type": "AND",
+                        "resources": [
+                            { "type": "RESOURCE", "id": "lead", "amount": 200 },
+                            { "type": "RESOURCE", "id": "glass", "amount": 2 }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ],
+    "produces": [
+        {
+            "type": "BRANCH",
+            "settingName": "Recipe",
+            "branches": [
+                [
+                    "Atmo Suit",
+                    {
+                        "type": "RESOURCE",
+                        "id": "atmo_suit",
+                        "amount": 1
+                    }
+                ],
+                [
+                    "Jet Suit",
+                    {
+                        "type": "RESOURCE",
+                        "id": "jet_suit",
+                        "amount": 1
+                    }
+                ],
+                [
+                    "Lead Suit",
+                    {
+                        "type": "RESOURCE",
+                        "id": "lead_suit",
+                        "amount": 1
+                    }
+                ]
+            ]
+        }
+    ]
+}
